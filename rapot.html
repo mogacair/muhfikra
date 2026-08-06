@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapot Siswa - SI-SEKOLAH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-brand">
+      <i class="fa-solid fa-school" style="font-size: 1.3rem;"></i>
+      <span>SI-SEKOLAH</span>
+    </div>
+    <div>
+      <i class="fa-solid fa-circle-user" style="font-size: 1.5rem;"></i>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="content-section">
+      <div id="rapot-step-guru">
+        <a href="index.html" class="btn-back-floating">
+          <i class="fa-solid fa-arrow-left"></i> Kembali
+        </a>
+
+        <h3 class="section-title">Pilih Guru / Mata Pelajaran</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: -10px; margin-bottom: 16px;">
+          Pilih nama guru untuk mulai menginput nilai Ujian/Rapot siswa.
+        </p>
+
+        <div class="guru-rapot-grid">
+          <div class="card-guru-rapot" onclick="pilihGuruRapot('Bambang Setyono, S.Pd', 'Pemrograman Web', 'Pemrograman Berorientasi Objek')">
+            <div class="guru-info-header">
+              <div class="guru-avatar"><i class="fa-solid fa-chalkboard-user"></i></div>
+              <div class="guru-nama">Bambang Setyono, S.Pd</div>
+            </div>
+            <div class="mapel-badge-container">
+              <span class="mapel-badge"><i class="fa-solid fa-book"></i> Pemrograman Web</span>
+              <span class="mapel-badge"><i class="fa-solid fa-book"></i> Pemrograman Berorientasi Objek</span>
+            </div>
+          </div>
+
+          <div class="card-guru-rapot" onclick="pilihGuruRapot('Siti Rahmawati, M.Pd', 'Matematika', 'Informatika')">
+            <div class="guru-info-header">
+              <div class="guru-avatar"><i class="fa-solid fa-chalkboard-user"></i></div>
+              <div class="guru-nama">Siti Rahmawati, M.Pd</div>
+            </div>
+            <div class="mapel-badge-container">
+              <span class="mapel-badge"><i class="fa-solid fa-book"></i> Matematika</span>
+              <span class="mapel-badge"><i class="fa-solid fa-book"></i> Informatika</span>
+            </div>
+          </div>
+
+          <div class="card-guru-rapot" onclick="pilihGuruRapot('Ahmad Dahlan, S.T', 'Basis Data', 'PPLG')">
+            <div class="guru-info-header">
+              <div class="guru-avatar"><i class="fa-solid fa-chalkboard-user"></i></div>
+              <div class="guru-nama">Ahmad Dahlan, S.T</div>
+            </div>
+            <div class="mapel-badge-container">
+              <span class="mapel-badge"><i class="fa-solid fa-book"></i> Basis Data</span>
+              <span class="mapel-badge"><i class="fa-solid fa-book"></i> PPLG</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="rapot-step-input" style="display: none;">
+        <button class="btn-back-floating" onclick="kembaliKePilihGuru()">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Pilih Guru
+        </button>
+
+        <div class="rapot-form-card">
+          <h3 id="labelGuruPengampu" style="margin-bottom: 16px; color: var(--primary-green);">Input Nilai - Guru</h3>
+
+          <div class="filter-rapot-grid">
+            <div class="form-group">
+              <label>Jenis Ujian</label>
+              <select class="select-kelas" id="rapotJenisUjian">
+                <option value="PTS">PTS (Penilaian Tengah Semester)</option>
+                <option value="PAS">PAS (Penilaian Akhir Semester)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Semester</label>
+              <select class="select-kelas" id="rapotSemester">
+                <option value="Semester 1">Semester 1 (Ganjil)</option>
+                <option value="Semester 2">Semester 2 (Genap)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Tahun Pelajaran</label>
+              <input type="text" id="rapotTahunPelajaran" readonly style="background-color: var(--bg-gray); font-weight: 600;">
+            </div>
+
+            <div class="form-group">
+              <label>Mata Pelajaran</label>
+              <select class="select-kelas" id="rapotMapel"></select>
+            </div>
+
+            <div class="form-group">
+              <label>Pilih Kelas</label>
+              <select class="select-kelas" id="rapotFilterKelas" onchange="filterSiswaRapot()">
+                <option value="">-- Pilih Kelas --</option>
+                <option value="X RPL 1">X RPL 1</option>
+                <option value="XI RPL 1">XI RPL 1</option>
+                <option value="XII RPL 1">XII RPL 1</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-container" style="margin-bottom: 20px;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 50px;">No</th>
+                  <th>Nama Lengkap</th>
+                  <th>Kelas</th>
+                  <th style="width: 150px; text-align: center;">Input Nilai (0-100)</th>
+                </tr>
+              </thead>
+              <tbody id="rapotSiswaTableBody">
+                <tr>
+                  <td colspan="5" style="text-align: center; padding: 20px; color: var(--text-muted);">
+                    Silakan pilih kelas terlebih dahulu untuk menampilkan data siswa.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 12px;">
+            <button type="button" class="btn btn-outline" onclick="resetFormNilaiRapot()">
+              <i class="fa-solid fa-rotate-left"></i> Reset Nilai
+            </button>
+            <button type="button" class="btn btn-primary" onclick="simpanNilaiRapot()">
+              <i class="fa-solid fa-floppy-disk"></i> Simpan Nilai
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL WARNING -->
+  <div class="modal" id="modalBackWarning">
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+      <div class="modal-header" style="justify-content: center; border-bottom: none; padding-bottom: 0;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 3rem; color: var(--accent-red);"></i>
+      </div>
+      <div class="modal-body">
+        <h3 style="margin-bottom: 8px;">Aksi Tidak Diizinkan</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Navigasi kembali melalui tombol browser tidak diperbolehkan. Silakan gunakan tombol navigasi/kembali yang tersedia di dalam aplikasi.
+        </p>
+      </div>
+      <div class="modal-footer" style="justify-content: center; border-top: none; padding-top: 0;">
+        <button type="button" class="btn btn-primary" onclick="closeBackWarning()">Saya Mengerti</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbw6qL109DDVPZNs4VVRcy5GM8ISVQvf_2by3ikBVbiYKg6WYzR1sCxqOJRIsYLSgVPc/exec"; 
+    let masterSiswa = [];
+    let guruAktif = "";
+
+    function muatDataSiswa() {
+      fetch(GAS_API_URL)
+        .then(res => res.json())
+        .then(response => {
+          if (response.status === "success") {
+            masterSiswa = response.data;
+          }
+        });
+    }
+
+    function pilihGuruRapot(namaGuru, mapel1, mapel2) {
+      guruAktif = namaGuru;
+      document.getElementById('labelGuruPengampu').innerText = 'Input Nilai - ' + namaGuru;
+
+      const selectMapel = document.getElementById('rapotMapel');
+      selectMapel.innerHTML = `
+        <option value="${mapel1}">${mapel1}</option>
+        <option value="${mapel2}">${mapel2}</option>
+      `;
+
+      const tahunSekarang = new Date().getFullYear();
+      document.getElementById('rapotTahunPelajaran').value = tahunSekarang + " / " + (tahunSekarang + 1);
+
+      document.getElementById('rapot-step-guru').style.display = 'none';
+      document.getElementById('rapot-step-input').style.display = 'block';
+
+      document.getElementById('rapotFilterKelas').value = "";
+      document.getElementById('rapotSiswaTableBody').innerHTML = `
+        <tr>
+          <td colspan="5" style="text-align: center; padding: 20px; color: var(--text-muted);">
+            Silakan pilih kelas terlebih dahulu untuk menampilkan data siswa.
+          </td>
+        </tr>
+      `;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function kembaliKePilihGuru() {
+      document.getElementById('rapot-step-input').style.display = 'none';
+      document.getElementById('rapot-step-guru').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function filterSiswaRapot() {
+      const kelasPilihan = document.getElementById('rapotFilterKelas').value;
+      const tbody = document.getElementById('rapotSiswaTableBody');
+      tbody.innerHTML = '';
+
+      if (!kelasPilihan) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 20px; color: var(--text-muted);">
+              Silakan pilih kelas terlebih dahulu untuk menampilkan data siswa.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      const dataSiswaFilter = masterSiswa.filter(s => s.kelas === kelasPilihan);
+
+      if (dataSiswaFilter.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 20px; color: var(--text-muted);">
+              Tidak ada data siswa ditemukan untuk kelas ${kelasPilihan}.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      dataSiswaFilter.forEach((s, index) => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${index + 1}</td>
+            <td><strong>${s.nama}</strong></td>
+            <td>${s.kelas}</td>
+            <td style="text-align: center;">
+              <input type="number" min="0" max="100" class="input-nilai-rapot" placeholder="0-100" data-nisn="${s.nisn}">
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function resetFormNilaiRapot() {
+      if (confirm('Apakah Anda yakin ingin mengosongkan semua isian nilai di tabel?')) {
+        const inputs = document.querySelectorAll('.input-nilai-rapot');
+        inputs.forEach(input => input.value = '');
+      }
+    }
+
+    function simpanNilaiRapot() {
+      const kelas = document.getElementById('rapotFilterKelas').value;
+      const mapel = document.getElementById('rapotMapel').value;
+      const jenisUjian = document.getElementById('rapotJenisUjian').value;
+      const semester = document.getElementById('rapotSemester').value;
+
+      if (!kelas) {
+        alert('Harap pilih kelas terlebih dahulu!');
+        return;
+      }
+
+      const listInput = document.querySelectorAll('.input-nilai-rapot');
+      const rekapNilai = [];
+
+      listInput.forEach(input => {
+        if (input.value !== "") {
+          rekapNilai.push({ nisn: input.getAttribute('data-nisn'), nilai: input.value });
+        }
+      });
+
+      if (rekapNilai.length === 0) {
+        alert('Belum ada nilai siswa yang diisi!');
+        return;
+      }
+
+      alert(`Berhasil menyimpan ${rekapNilai.length} nilai siswa!\nMapel: ${mapel}\nUjian: ${jenisUjian} (${semester})\nKelas: ${kelas}`);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      muatDataSiswa();
+    });
+  </script>
+</body>
+</html>
