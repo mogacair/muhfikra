@@ -25,3 +25,21 @@ function closeBackWarning() {
     modalWarning.classList.remove('active');
   }
 }
+
+/* ==========================================================================
+   LOGIKA TOMBOL KELUAR / LOGOUT (MENUTUP TAB / KELUAR APLIKASI)
+   ========================================================================== */
+function konfirmasiKeluar() {
+  if (confirm("Apakah Anda yakin ingin keluar dari aplikasi?")) {
+    // 1. Lepas proteksi back history
+    window.onpopstate = null;
+
+    // 2. Coba tutup tab/window
+    window.close();
+
+    // 3. Fallback: Jika diblokir browser, alihkan ke layar netral (layar putih kosong)
+    setTimeout(function () {
+      window.location.href = "about:blank";
+    }, 100);
+  }
+}
