@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Informasi Sekolah Terintegrasi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-brand">
+      <i class="fa-solid fa-school" style="font-size: 1.3rem;"></i>
+      <span>SI-SEKOLAH</span>
+    </div>
+    <div>
+      <i class="fa-solid fa-circle-user" style="font-size: 1.5rem;"></i>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div id="section-dashboard">
+      <div class="welcome-banner">
+        <h2>Selamat Datang!</h2>
+        <p>Sistem Informasi Data Sekolah Terintegrasi</p>
+      </div>
+
+      <h3 class="section-title">Akses Cepat Fitur</h3>
+      
+      <div class="menu-grid">
+        <a href="siswa.html" class="card-menu">
+          <div class="card-icon icon-siswa"><i class="fa-solid fa-user-graduate"></i></div>
+          <div class="card-title">Data Siswa</div>
+        </a>
+
+        <a href="guru.html" class="card-menu">
+          <div class="card-icon icon-guru"><i class="fa-solid fa-chalkboard-user"></i></div>
+          <div class="card-title">Data Guru</div>
+        </a>
+
+        <a href="alumni.html" class="card-menu">
+          <div class="card-icon icon-alumni"><i class="fa-solid fa-user-tie"></i></div>
+          <div class="card-title">Data Alumni</div>
+        </a>
+
+        <a href="rapot.html" class="card-menu">
+          <div class="card-icon icon-rapot"><i class="fa-solid fa-file-invoice"></i></div>
+          <div class="card-title">Rapot</div>
+        </a>
+
+        <a href="pelanggaran.html" class="card-menu">
+          <div class="card-icon icon-pelanggaran"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="card-title">Pelanggaran</div>
+        </a>
+
+        <a href="surat.html" class="card-menu">
+          <div class="card-icon icon-surat"><i class="fa-solid fa-envelope-open-text"></i></div>
+          <div class="card-title">Surat Menyurat</div>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL POPUP PERINGATAN TOMBOL BACK BROWSER -->
+  <div class="modal" id="modalBackWarning">
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+      <div class="modal-header" style="justify-content: center; border-bottom: none; padding-bottom: 0;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 3rem; color: var(--accent-red);"></i>
+      </div>
+      <div class="modal-body">
+        <h3 style="margin-bottom: 8px;">Aksi Tidak Diizinkan</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Navigasi kembali melalui tombol browser tidak diperbolehkan. Silakan gunakan tombol navigasi/kembali yang tersedia di dalam aplikasi.
+        </p>
+      </div>
+      <div class="modal-footer" style="justify-content: center; border-top: none; padding-top: 0;">
+        <button type="button" class="btn btn-primary" onclick="closeBackWarning()">Saya Mengerti</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
