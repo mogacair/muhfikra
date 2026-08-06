@@ -4,12 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Data Siswa - SI-SEKOLAH</title>
+  
+  <!-- Import Google Fonts & Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- CSS Utama -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+  <!-- HEADER ATAS -->
   <header class="header">
     <div class="header-brand">
       <i class="fa-solid fa-school" style="font-size: 1.3rem;"></i>
@@ -20,29 +25,29 @@
     </div>
   </header>
 
+  <!-- KONTEN UTAMA -->
   <main class="main-content">
+    <!-- TOMBOL KEMBALI MENGAMBANG -->
     <a href="index.html" class="btn-back-floating">
       <i class="fa-solid fa-arrow-left"></i> Kembali
     </a>
 
     <div class="content-section">
+      <!-- HEADER PRINT -->
       <div class="print-header">
         <h2>Data Siswa SMK Muhammadiyah 5 Karanganyar</h2>
         <p id="printSubTitle"></p>
       </div>
 
+      <!-- ACTION TOOLBAR (Pilihan 10 baris sudah dihapus) -->
       <div class="action-toolbar">
         <div class="toolbar-left">
+          <!-- Filter Kelas -->
           <select class="select-kelas" id="filterKelas" onchange="filterDataSiswa()">
             <option value="SEMUA">-- Semua Kelas --</option>
             <option value="X RPL 1">X RPL 1</option>
             <option value="XI RPL 1">XI RPL 1</option>
             <option value="XII RPL 1">XII RPL 1</option>
-          </select>
-          
-          <select class="select-kelas" id="limitSiswa" onchange="filterDataSiswa()">
-            <option value="10">10 Baris</option>
-            <option value="SEMUA">Semua Data</option>
           </select>
         </div>
         <div class="toolbar-right">
@@ -55,6 +60,7 @@
         </div>
       </div>
 
+      <!-- TABEL DATA SISWA -->
       <div class="table-container">
         <table class="data-table">
           <thead>
@@ -70,7 +76,9 @@
               <th>Nama Ayah</th>
             </tr>
           </thead>
-          <tbody id="siswaTableBody"></tbody>
+          <tbody id="siswaTableBody">
+            <!-- Data dimasukkan via Javascript -->
+          </tbody>
         </table>
       </div>
     </div>
@@ -81,19 +89,45 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="modalTitle">Detail Data Siswa</h4>
-        <button class="close-btn" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color: var(--text-dark);" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+        <button class="close-btn" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color: var(--text-dark);" onclick="closeModal()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
       <div class="modal-body">
         <form id="formSiswa">
           <div class="form-grid">
-            <div class="form-group"><label>NIPD</label><input type="text" id="inputNIPD" required></div>
-            <div class="form-group"><label>NISN</label><input type="text" id="inputNISN" required readonly></div>
-            <div class="form-group" style="grid-column: span 2;"><label>Nama Lengkap</label><input type="text" id="inputNama" required></div>
-            <div class="form-group"><label>Kelas</label><input type="text" id="inputKelas"></div>
-            <div class="form-group"><label>NIK</label><input type="text" id="inputNIK"></div>
-            <div class="form-group"><label>Tempat, Tgl Lahir</label><input type="text" id="inputTTL"></div>
-            <div class="form-group"><label>Nama Ibu</label><input type="text" id="inputIbu"></div>
-            <div class="form-group"><label>Nama Ayah</label><input type="text" id="inputAyah"></div>
+            <div class="form-group">
+              <label>NIPD</label>
+              <input type="text" id="inputNIPD" required>
+            </div>
+            <div class="form-group">
+              <label>NISN</label>
+              <input type="text" id="inputNISN" required readonly>
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+              <label>Nama Lengkap</label>
+              <input type="text" id="inputNama" required>
+            </div>
+            <div class="form-group">
+              <label>Kelas</label>
+              <input type="text" id="inputKelas">
+            </div>
+            <div class="form-group">
+              <label>NIK</label>
+              <input type="text" id="inputNIK">
+            </div>
+            <div class="form-group">
+              <label>Tempat, Tgl Lahir</label>
+              <input type="text" id="inputTTL">
+            </div>
+            <div class="form-group">
+              <label>Nama Ibu</label>
+              <input type="text" id="inputIbu">
+            </div>
+            <div class="form-group">
+              <label>Nama Ayah</label>
+              <input type="text" id="inputAyah">
+            </div>
           </div>
         </form>
       </div>
@@ -104,7 +138,7 @@
     </div>
   </div>
 
-  <!-- MODAL WARNING -->
+  <!-- MODAL WARNING NAVIGATION -->
   <div class="modal" id="modalBackWarning">
     <div class="modal-content" style="max-width: 400px; text-align: center;">
       <div class="modal-header" style="justify-content: center; border-bottom: none; padding-bottom: 0;">
@@ -122,31 +156,55 @@
     </div>
   </div>
 
+  <!-- JAVASCRIPT GLOBAL & PENCEGAHAN BACK BROWSER -->
   <script src="js/script.js"></script>
+
+  <!-- JAVASCRIPT LOGIKA KHUSUS LAMAN SISWA -->
   <script>
     const GAS_API_URL = "https://script.google.com/macros/s/AKfycbw6qL109DDVPZNs4VVRcy5GM8ISVQvf_2by3ikBVbiYKg6WYzR1sCxqOJRIsYLSgVPc/exec"; 
     let masterSiswa = [];
 
+    // 1. FUNGSI PEMUATAN DATA DENGAN CACHING LOCALSTORAGE (LODING INSTAN)
     function muatDataSiswaDariGAS() {
       const tbody = document.getElementById('siswaTableBody');
-      tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 20px;">Memuat data dari Google Sheets...</td></tr>`;
+      const cachedData = localStorage.getItem('siswa_cache');
 
+      // Tampilkan dari Cache terlebih dahulu jika ada (Loading 0 Detik)
+      if (cachedData) {
+        try {
+          masterSiswa = JSON.parse(cachedData);
+          filterDataSiswa();
+        } catch (e) {
+          console.error("Gagal membaca cache:", e);
+        }
+      } else {
+        // Tampilan skeleton/loading awal jika cache belum pernah dibuat
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 20px;">Memuat data dari server...</td></tr>`;
+      }
+
+      // Selalu perbarui data terbaru di background (Background Sync)
       fetch(GAS_API_URL)
         .then(res => res.json())
         .then(response => {
           if (response.status === "success") {
             masterSiswa = response.data;
+            
+            // Simpan data terbaru ke Cache Browser
+            localStorage.setItem('siswa_cache', JSON.stringify(masterSiswa));
+            
+            // Render ulang tabel dengan data paling mutakhir
             filterDataSiswa();
-          } else {
-            alert("Gagal memuat data: " + response.message);
           }
         })
         .catch(err => {
-          console.error("Error:", err);
-          tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 20px; color: var(--accent-red);">Gagal terhubung ke Google Sheets.</td></tr>`;
+          console.error("Error background fetch:", err);
+          if (!cachedData) {
+            tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 20px; color: var(--accent-red);">Gagal terhubung ke Google Sheets.</td></tr>`;
+          }
         });
     }
 
+    // 2. FUNGSI SIMPAN EDIT DATA
     function simpanSiswa() {
       const payload = {
         action: "UPDATE",
@@ -160,7 +218,7 @@
         ayah: document.getElementById('inputAyah').value
       };
 
-      alert("Sedang menyimpan perubahan...");
+      alert("Sedang menyimpan perubahan ke Google Sheets...");
 
       fetch(GAS_API_URL, {
         method: "POST",
@@ -170,7 +228,7 @@
       .then(res => {
         alert(res.message);
         closeModal();
-        muatDataSiswaDariGAS();
+        muatDataSiswaDariGAS(); // Reload otomatis data & refresh cache
       })
       .catch(err => {
         console.error("Error:", err);
@@ -178,6 +236,7 @@
       });
     }
 
+    // 3. RENDER TABEL (MENAMPILKAN SELURUH DATA)
     function renderTabelSiswa(data) {
       const tbody = document.getElementById('siswaTableBody');
       tbody.innerHTML = '';
@@ -204,31 +263,26 @@
       });
     }
 
+    // 4. FILTER DATA KELAS (TANPA LIMIT BARIS)
     function filterDataSiswa() {
       const kelasPilihan = document.getElementById('filterKelas').value;
-      const limitPilihan = document.getElementById('limitSiswa').value;
-
       let filtered = masterSiswa;
 
       if (kelasPilihan !== 'SEMUA') {
         filtered = masterSiswa.filter(s => s.kelas === kelasPilihan);
       }
 
-      if (limitPilihan !== 'SEMUA') {
-        const limit = parseInt(limitPilihan, 10);
-        filtered = filtered.slice(0, limit);
-      }
-
+      // Langsung tampilkan seluruh data hasil filter
       renderTabelSiswa(filtered);
     }
 
+    // 5. FUNGSI CETAK PDF
     function cetakPDF(tipe) {
       const kelasPilihan = document.getElementById('filterKelas').value;
       const printSubTitle = document.getElementById('printSubTitle');
 
       if (tipe === 'SEMUA') {
         document.getElementById('filterKelas').value = 'SEMUA';
-        document.getElementById('limitSiswa').value = 'SEMUA';
         renderTabelSiswa(masterSiswa);
         printSubTitle.innerText = '';
       } else if (tipe === 'KELAS') {
@@ -236,7 +290,6 @@
           alert('Pilih kelas terlebih dahulu pada dropdown sebelum mencetak per Kelas!');
           return;
         }
-        document.getElementById('limitSiswa').value = 'SEMUA';
         const filtered = masterSiswa.filter(s => s.kelas === kelasPilihan);
         renderTabelSiswa(filtered);
         printSubTitle.innerText = 'Kelas : ' + kelasPilihan;
@@ -245,6 +298,7 @@
       setTimeout(() => { window.print(); }, 300);
     }
 
+    // 6. MODAL UTILITIES
     function openModalEdit(nama, nipd, nisn, kelas, nik, ttl, ibu, ayah) {
       document.getElementById('modalTitle').innerText = 'Edit Data Siswa';
       document.getElementById('inputNama').value = nama;
@@ -262,6 +316,7 @@
       document.getElementById('modalSiswa').classList.remove('active');
     }
 
+    // INISIALISASI SAAT DOM READY
     document.addEventListener('DOMContentLoaded', () => {
       muatDataSiswaDariGAS();
     });
